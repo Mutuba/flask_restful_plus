@@ -1,4 +1,4 @@
-from app.main import db
+from instance import db
 from app.auth.model.blacklist import BlacklistToken
 
 
