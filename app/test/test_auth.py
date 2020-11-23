@@ -17,6 +17,7 @@ def register_user(self):
     )
 
 
+
 def login_user(self):
     return self.client.post(
         '/auth/login',
