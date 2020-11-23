@@ -23,6 +23,7 @@ migrate = Migrate(app, db)
 
 manager.add_command('db', MigrateCommand)
 
+
 @manager.command
 def run():
     app.run()
