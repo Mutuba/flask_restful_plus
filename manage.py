@@ -3,13 +3,18 @@ import unittest
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-
+from werkzeug.utils import cached_property
 from app.auth.model import user
+from app.auth.model import blacklist
 from instance import create_app, db
+
+from app.auth import blueprint
 
 app = create_app(os.getenv('APP_SETTINGS'))
 
+app.register_blueprint(blueprint)
 app.app_context().push()
+
 
 manager = Manager(app)
 
