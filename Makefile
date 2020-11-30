@@ -19,4 +19,9 @@ run:
 	. plus/bin/activate; \
 	python manage.py run
 
+
+dummy:
+	. plus/bin/activate; \
+	python manage.py dummy
+
 all: clean install tests run

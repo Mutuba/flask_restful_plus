@@ -1,5 +1,6 @@
 
 from flask_restplus import Api
+
 from flask import Blueprint
 
 from .controller.user_controller import api as user_ns

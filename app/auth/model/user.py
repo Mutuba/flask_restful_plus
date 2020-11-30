@@ -3,7 +3,7 @@ import datetime
 import jwt
 from app.auth.model.blacklist import BlacklistToken
 from instance.config import key
-
+from app.auth.model import address
 
 class User(db.Model):
     """ User Model for storing user related details """
@@ -16,6 +16,7 @@ class User(db.Model):
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
+    address_id = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
 
     @property
     def password(self):

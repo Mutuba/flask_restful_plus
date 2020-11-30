@@ -48,6 +48,38 @@ def get_all_users():
     return User.query.all()
 
 
+def get_paginated_list(results, url, page, per_page):
+    page = int(page)
+    per_page = int(per_page)
+    # import pdb;pdb.set_trace()
+    count = len(results)
+    if count < page or per_page < 0:
+        abort(404)
+    # make response
+    obj = {}
+    obj['page'] = page
+    obj['per_page'] = per_page
+    obj['count'] = count
+    # make URLs
+    # make previous url
+    if page == 1:
+        obj['previous'] = ''
+    else:
+        page_copy = max(1, page - per_page)
+        per_page_copy = page - 1
+        obj['previous'] = url + '?page=%d&per_page=%d' % (page_copy, per_page_copy)
+    # make next url
+    if page + per_page > count:
+        obj['next'] = ''
+    else:
+        page_copy = page + per_page
+        obj['next'] = url + '?page=%d&per_page=%d' % (page_copy, per_page)
+    # finally extract result according to bounds
+    obj['results'] = results[(page - 1):(page - 1 + per_page)]
+    return obj
+
+
+
 def get_a_user(public_id):
     return User.query.filter_by(public_id=public_id).first()
 

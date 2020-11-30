@@ -161,3 +161,15 @@
     #     args = parse.parse_args()
     #     audioFile = args['file']
     #     audioFile.save("your_file_name.jpg")
+    
+    # def closestNumbers(numbers):
+    #     solution_dict = {}
+    #     diff_array =[]
+    #     sorted_list = sorted(numbers)
+    #     for i in range(0, len(sorted_list)-1):
+    #         diff_array.append(abs(sorted_list[i]- sorted_list[i+1]))
+    #     mini_difference = min(diff_array)
+    #     for i in range(0, len(sorted_list)-1):
+    #         value = abs(sorted_list[i] - sorted_list[i+1])
+    #         if(value == mini_difference):
+    #             print(sorted_list[i], sorted_list[i+1])
