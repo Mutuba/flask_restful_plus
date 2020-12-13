@@ -1,1 +1,46 @@
 plus/
+**/__pycache__
+env
+.env
+uploads
+*.pyc
+# Byte-compiled / optimized / DLL files
+__pycache__/
+**/__pycache__/ 
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+.idea/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.db
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+
+# mypy
+.mypy_cache/
+# PyBuilder
+target/
+
+
