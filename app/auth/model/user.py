@@ -1,11 +1,25 @@
 from instance import db, flask_bcrypt
+from alcohol.rbac.sqlalchemy import SQLAlchemyRBAC
+from alcohol.mixins.sqlalchemy import SQLAlchemyEmailMixin,SQLAlchemyPasswordMixin
 import datetime
 import jwt
 from app.auth.model.blacklist import BlacklistToken
 from instance.config import key
-from app.auth.model import address
+# from app.auth.model.address import Address
+# from app.auth.model.user_address import UserAddress
+from app.auth.model.phone import Phone
 
-class User(db.Model):
+
+
+class UserAddress(db.Model):
+    __tablename__ = 'user_address'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
+    address_id = db.Column(db.Integer, db.ForeignKey('address.id'), primary_key = True)
+    
+    
+    
+class User(db.Model, SQLAlchemyEmailMixin, SQLAlchemyPasswordMixin):
     """ User Model for storing user related details """
     __tablename__ = "user"
 
@@ -16,7 +30,8 @@ class User(db.Model):
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
-    address_id = db.Column(db.Integer, db.ForeignKey("address.id"), nullable=False)
+    addresses= db.relationship('Address', secondary = 'user_address')
+    phones = db.relationship(Phone, backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -70,4 +85,30 @@ class User(db.Model):
                 return 'Invalid token. Please log in again.'
 
     def __repr__(self):
-        return "<User '{}'>".format(self.username)
+        return "<User '{}'>".format(self.username)    
+
+class Address(db.Model):
+    """ User Model for storing user related details """
+    __tablename__ = "address"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(255), unique=True, nullable=False)
+    users = db.relationship('User', secondary='user_address')
+    
+
+
+    
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    
+    
+    
+class Permission(db.Model):
+    __tablename__ = 'permissions'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    
+    
+acl = SQLAlchemyRBAC(User, Role, Permission)

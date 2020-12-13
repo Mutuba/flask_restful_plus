@@ -51,7 +51,6 @@ def get_all_users():
 def get_paginated_list(results, url, page, per_page):
     page = int(page)
     per_page = int(per_page)
-    # import pdb;pdb.set_trace()
     count = len(results)
     if count < page or per_page < 0:
         abort(404)

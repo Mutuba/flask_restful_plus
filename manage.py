@@ -4,12 +4,24 @@ import datetime
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from app.auth.model import user
+
 from app.auth.model import blacklist
 from instance import create_app, db
 
 
 from app.auth.model.user import User
-from app.auth.model.address import Address
+from app.auth.model.user import Address
+from app.auth.model.user import UserAddress
+from app.auth.model.phone import Phone
+
+
+from app.auth.model.user import Role
+from app.auth.model.user import  Permission
+
+from app.auth.model.employee import Employee
+from app.auth.model.boss import Boss
+from app.auth.model.engineer import Engineer
+
 
 
 from app.auth import blueprint
@@ -56,7 +68,13 @@ def test():
 def dummy():
     for i in range(100):
         # Create a user if they do not exist.
-        user = User(email=f"example{i}@bucketmail.com", password="123456", public_id=f"public_{i}", username=f"example{i}", registered_on=datetime.datetime.utcnow())
+        user = User(
+            email=f"example{i}@bucketmail.com",
+            password="123456",
+            public_id=f"public_{i}", 
+            username=f"example{i}", 
+            registered_on=datetime.datetime.utcnow()
+            )
         db.session.add(user)
         db.session.commit()
 
