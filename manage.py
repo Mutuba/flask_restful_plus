@@ -21,8 +21,13 @@ from app.auth.model.user import  Permission
 from app.auth.model.employee import Employee
 from app.auth.model.boss import Boss
 from app.auth.model.engineer import Engineer
+from app.auth.model.tag import Tag
+from app.auth.model.category import Category
+from app.auth.model.product import Product
 
-
+from app.auth.model.author import Author
+from app.auth.model.book import Book
+from app.auth.model.mutuba import Mutuba
 
 from app.auth import blueprint
 
@@ -85,6 +90,8 @@ def address():
         address = Address(name=f"Roy{i}")
         db.session.add(address)
         db.session.commit()
+        
+    
 
 if __name__ == '__main__':
     manager.run()

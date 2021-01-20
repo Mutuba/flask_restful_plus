@@ -176,6 +176,13 @@ from flask_restplus import fields, marshal, reqparse
 #         return False
 #     return email
 
+
+# created_at = fields.Function(lambda obj: obj.created_at.isoformat())
+# modified_at = fields.Function(lambda obj: obj.modified_at.isoformat())
+    
+    
+    
+
 pagination = reqparse.RequestParser()
 
 pagination.add_argument('page', type=int, required=False, default=1, help='Page number')
@@ -328,16 +335,6 @@ class User(Resource):
     #         self.assertEqual(response.status_code, 200)
     
     
-    
-    # def test_registered_vendor_confirm_token_with_invalid_token(self):
-    #     """ Test for registered vendor confirm token with invalid confirmation token """
-        
-    #     with self.client:
-    #         token = str(uuid.uuid4())
-    #         confirm_token_resp = self.confirm_vendor_token(token)
-    #         data = json.loads(confirm_token_resp.data)
-    #         self.assertTrue(data['message'] == 'The confirmation link is invalid or has expired.')
-
 
     # def test_unconfirmed_registered_user_login(self):
     #     """ Test for login of registered user but unconfirmed """
@@ -365,23 +362,671 @@ class User(Resource):
     #         self.assertEqual(response.status_code, 401)
     
     
-                # if not user.active:
-                #     response_object = {
-                #         'status': 'fail',
-                #         'message': 'Your account is not active yet'
-                #     }
-                    
-                #     return response_object, 401
-                
-                # if not user.confirmed:
-                #     response_object = {
-                #         'status': 'fail',
-                #         'message': 'Your account has not been confirmed yet'
-                #     }
-                    
-                #     return response_object, 401
-                
-                
-            # token = generate_confirmation_token('johndoe@gmail.com')
-            # self.confirm_vendor_token(token)
+    # if not user.active:
+    #     response_object = {
+    #         'status': 'fail',
+    #         'message': 'Your account is not active yet'
+    #     }
+        
+    #     return response_object, 401
+    
+    # if not user.confirmed:
+    #     response_object = {
+    #         'status': 'fail',
+    #         'message': 'Your account has not been confirmed yet'
+    #     }
+        
+    #     return response_object, 401
+    
+    
+# token = generate_confirmation_token('johndoe@gmail.com')
+# self.confirm_vendor_token(token)
             
+    # def test_inactive_registered_user_login(self):
+    #     """ Test for login of registered user but inactive """
+    #     with self.client:
+    #         # user registration
+    #         resp_register = self.register_user()
+    #         data_register = json.loads(resp_register.data.decode())
+    #         self.assertTrue(data_register['status'] == 'success')
+    #         self.assertTrue(
+    #             data_register['message'] == 'Successfully registered.'
+    #         )
+    #         self.assertTrue(data_register['Authorization'])
+    #         self.assertTrue(resp_register.content_type == 'application/json')
+    #         self.assertEqual(resp_register.status_code, 201)
+    #         # registered user login
+    #         # query for the user and set status to inactive state
+    #         user = User.get_by_email('johndoe@gmail.com')
+    #         user.active=False
+    #         save_changes(user)
+    #         response = self.login_user()
+    #         data = json.loads(response.data.decode())
+    #         self.assertTrue(data['status'] == 'fail')
+    #         self.assertTrue(data['message'] == 'Your account is not active yet')
+    #         self.assertTrue(response.content_type == 'application/json')
+    #         self.assertEqual(response.status_code, 401)
+           
+        # def confirm_vendor_token(self, token):
+    #     return self.client.get(
+    #     'api/v1/vendors/confirm/' + token,
+    #     content_type='application/json'
+    # ) 
+            
+    # def test_registered_with_wrong_email_format_vendor_email(self):
+    #     """ Test vendor registration with wrong email format """
+    #     self.register_vendor()
+    #     with self.client:
+    #         response = self.register_vendor_with_wrong_email_format()
+    #         data = json.loads(response.data.decode())
+    #         self.assertTrue(data['status'] == 'fail')
+    #         self.assertTrue(
+    #             data['message'] == 'Missing or wrong email format or password is less than six characters')
+    #         self.assertEqual(response.status_code, 409)
+    
+   # def register_vendor_with_wrong_email_format(self):
+    #     return self.client.post(
+    #         'api/v1/vendors/',
+    #         data=json.dumps(dict( 
+    #             owner=dict(
+    #                 email="johndoe@com",
+    #                 username= "JohnDoe2",
+    #                 password= "ThePreciousPassword"
+    #             ),
+                
+    #             industry= "BEAUTY",
+    #             mode_of_payment="BANK_ACCOUNT",
+    #             business_email_address="westernseedcompany@gmail.com",
+    #             contact_person ="Saleem",
+    #             contact_person_contact="0724834583",
+    #             bank_acc_number="0001234567589",
+    #             description="We sell maize seed at farmer friendly prices",
+    #             business_name="Western Seed Company Limited"
+        
+    #         )),
+    #         content_type='application/json'
+    #     )
+    
+    # v=Vendor.query.paginate()
+    
+    
+    # def test_registered_vendor_confirm_token_with_invalid_token(self):
+    #     """ Test for registered vendor confirm token with invalid confirmation token """
+        
+    #     with self.client:
+    #         token = str(uuid.uuid4())
+    #         confirm_token_resp = self.confirm_vendor_token(token)
+    #         data = json.loads(confirm_token_resp.data)
+    #         self.assertTrue(data['message'] == 'The confirmation link is invalid or has expired.')
+    
+    
+# @api.route('/api/rec/<string:uid>')
+# @api.doc(params={'uid': {'description': 'user UID'},
+#                  'param1': {'description': 'blabla', 'in': 'query', 'type': 'int'}})
+# class MyResource(Resource):
+#     @api.doc(params={'param2': {'description': 'another param just for that get route',
+#                                 'type': 'int', 'default': 1}})
+#     def get(self, uid):
+#         param2 = int(request.args.get('param2'))
+#         param1 = int(request.args.get('param1'))
+#         return {'uid': uid, 'params': param1 + param2}
+
+#     def post(self, uid):
+#         param1 = request.args.get('param1')
+#         return {'uid': uid, 'params': param1}
+
+# It creates two endpoints: GET /api/rec/123321?param1=1&param2=3 and PUT /api/rec/123321?param1=100500
+
+# What is here:
+
+# You may add additional non-path arguments to api.doc. 
+# Though you can explicitly define them as 'in: 'query', it is not necessary; all params not in path are used as query params by default.
+# You may add additional doc & params to separate method (like param2 for GET). They are also considered as query params.
+# By default, all non-path params have 'required': False
+
+
+# def get_paginated_list(results, url, page, per_page):
+#     page = int(page)
+#     per_page = int(per_page)
+#     count = len(results)
+#     if count < page or per_page < 0:
+#         abort(404)
+#     # make response
+#     obj = {}
+#     obj['page'] = page
+#     obj['per_page'] = per_page
+#     obj['count'] = count
+#     # make URLs
+#     # make previous url
+#     if page == 1:
+#         obj['previous'] = ''
+#     else:
+#         page_copy = max(1, page - per_page)
+#         per_page_copy = page - 1
+#         obj['previous'] = url + '?page=%d&per_page=%d' % (page_copy, per_page_copy)
+#     # make next url
+#     if page + per_page > count:
+#         obj['next'] = ''
+#     else:
+#         page_copy = page + per_page
+#         obj['next'] = url + '?page=%d&per_page=%d' % (page_copy, per_page)
+#     # finally extract result according to bounds
+#     obj['results'] = results[(page - 1):(page - 1 + per_page)]
+#     return obj
+
+# def get_paginated_list(model, url, page, per_page):
+#     pagination_object = db.session.query(model).paginate(page=page, per_page=per_page, error_out=False)
+#     count = len(pagination_object.items)
+#     if count < page or per_page < 0:
+#         abort(404)
+    
+#     # make response
+#     obj = {}
+#     obj['page'] = page
+#     obj['per_page'] = per_page
+#     obj['count'] = count
+    
+#     previous = None
+#     if pagination_object.has_prev:
+#         # page = page-1
+#         obj['previous'] = url + '?page=%d&per_page=%d' % (page - 1, per_page)
+        
+#     nex = None
+#     if pagination_object.has_next:
+#         # page = page + 1
+#         obj['next'] = url + '?page=%d&per_page=%d' % (page + 1, per_page)
+        
+#     results = vendors_schema.dump(pagination_object.items)
+    
+#     obj['results'] = results
+    
+#     return obj
+
+
+# class CreditCard(Base):
+#     __tablename__ = 'card'
+#     id = Column(Integer, primary_key=True)
+#     user_id = Column(Integer, ForeignKey('user.id'), nullable=True)
+
+
+# class User(Base):
+#     __tablename__ = 'user'
+#     id = Column(Integer, primary_key=True)
+#     firstname = Column(String(50))
+#     lastname = Column(String(50))
+#     fullname = column_property(firstname + " " + lastname)
+#     credit_card = relationship(CreditCard, backref='report')
+#     has_credit_card = column_property(
+#         exists().where(CreditCard.user_id == id)
+#     )
+
+# john = User(id=1, firstname='John', lastname='Doe')
+# session.add(john)
+# session.commit()
+# print(john.has_credit_card)
+# # False
+# johns_card = CreditCard(user_id=1)
+# session.add(johns_card)
+# session.commit()
+# print(john.has_credit_card)
+# True
+
+
+# from sqlalchemy import (
+#     Column,
+#     Integer,
+#     String,
+#     Boolean,
+#     ForeignKey,
+#     DateTime,
+#     Sequence,
+#     Float
+# )
+# import datetime
+
+# DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+# Base = declarative_base()
+
+# class Book(Base):  #<------------------------- 
+#     __tablename__  = "books"    #matches the name of the actual database table
+#     id             = Column(Integer,Sequence('book_seq'),primary_key=True) # plays nice with all major database engines
+#     name           = Column(String(50))                                    # string column need lengths
+#     author_id      = Column(Integer,ForeignKey('authors.id'))              # assumes there is a table in the database called 'authors' that has an 'id' column
+#     price          = Column(Float)
+#     date_added     = Column(DateTime, default=datetime.datetime.now)       # defaults can be specified as functions
+#     promote        = Column(Boolean,default=False) 
+    
+    
+# product model
+# brand model that owns product
+
+# variations = a product variation out of product
+
+# class Interval(object):
+#     # ...
+
+#     @hybrid_property
+#     def length(self):
+#         return self.end - self.start
+
+#     @length.setter
+#     def length(self, value):
+#         self.end = self.start + value
+
+#     @length.update_expression
+#     def length(cls, value):
+#         return [
+#             (cls.end, cls.start + value)
+#         ]
+
+# session.query(Interval).update(
+#     {Interval.length: 25}, synchronize_session='fetch')
+
+
+# from sqlalchemy import Column, Integer, ForeignKey, Numeric, String
+# from sqlalchemy.orm import relationship
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.hybrid import hybrid_property
+# from sqlalchemy import select, func
+
+# Base = declarative_base()
+
+# class SavingsAccount(Base):
+#     __tablename__ = 'account'
+#     id = Column(Integer, primary_key=True)
+#     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+#     balance = Column(Numeric(15, 5))
+
+# class User(Base):
+#     __tablename__ = 'user'
+#     id = Column(Integer, primary_key=True)
+#     name = Column(String(100), nullable=False)
+
+#     accounts = relationship("SavingsAccount", backref="owner")
+
+#     @hybrid_property
+#     def balance(self):
+#         return sum(acc.balance for acc in self.accounts)
+
+#     @balance.expression
+#     def balance(cls):
+#         return select(func.sum(SavingsAccount.balance)).\
+#                 where(SavingsAccount.user_id==cls.id).\
+#                 label('total_balance')
+
+
+# from sqlalchemy import Column, Integer, ForeignKey, Numeric, String
+# from sqlalchemy.orm import relationship
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.hybrid import hybrid_property
+
+# Base = declarative_base()
+
+# class SavingsAccount(Base):
+#     __tablename__ = 'account'
+#     id = Column(Integer, primary_key=True)
+#     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+#     balance = Column(Numeric(15, 5))
+
+# class User(Base):
+#     __tablename__ = 'user'
+#     id = Column(Integer, primary_key=True)
+#     name = Column(String(100), nullable=False)
+
+#     accounts = relationship("SavingsAccount", backref="owner")
+
+#     @hybrid_property
+#     def balance(self):
+#         if self.accounts:
+#             return self.accounts[0].balance
+#         else:
+#             return None
+
+#     @balance.setter
+#     def balance(self, value):
+#         if not self.accounts:
+#             account = Account(owner=self)
+#         else:
+#             account = self.accounts[0]
+#         account.balance = value
+
+#     @balance.expression
+#     def balance(cls):
+#         return SavingsAccount.balance
+
+
+
+# from slugify import slugify  # among other things
+
+# class Song(db.Model):
+#     id = db.Column(db.Integer, primary_key = True)
+#     title = db.Column(db.String(255))
+#     slug = db.Column(db.String(255))
+
+#     def __init__(self, *args, **kwargs):
+#         if not 'slug' in kwargs:
+#             kwargs['slug'] = slugify(kwargs.get('title', ''))
+#         super().__init__(*args, **kwargs)
+
+    # pits = Column(ARRAY(Integer))
+    # stores = Column(ARRAY(Integer))
+    
+    # payment_method = db.Column(
+    #     db.Enum(PaymentMethod), default=PaymentMethod.PAYMENT_ON_DELIVERY, nullable=True
+    # )
+    
+# db.session.query(func.avg(ProductRating.rating).label("average_rating")).filter(ProductRating.product_id == self.id)
+    
+# class PaymentMethod(enum.Enum):
+#         MPESA = "Mpesa"
+#     CARD = "Card"
+#     WALLET = "Wallet"
+#     PAYMENT_ON_DELIVERY = "Payment on Delivery"
+
+# def upgrade():
+#     op.drop_constraint('experiments_name_key', 'experiments')
+
+# def downgrade():
+#     op.create_unique_constraint('experiments_name_key', 'experiments', ['name'])
+
+    
+# class UserSchema(Schema):
+#     name = fields.String()
+#     email = fields.String()
+#     created_at = fields.DateTime()
+#     since_created = fields.Method("get_days_since_created")
+#     def get_days_since_created(self, obj):
+#     return dt.datetime.now().day - obj.created_at.day
+
+    # def is_owner(self, owner_id):
+    #     """Checks if user is the owner."""
+    #     if self.owner.id == owner_id:
+    #         return True
+    #     else:
+    #         return False
+    
+
+# @staticmethod
+# def get_by_id(product_rating_id):
+#     """
+#     Filter a product_rating by Id.
+#     :param product_rating:
+#     :return: ProductRating object or None
+#     """
+#     return ProductRating.query.filter_by(id=product_rating_id).first()
+    
+
+# @classmethod
+# def bulk_create_or_none(cls, iterable, *args, **kwargs):
+#     try:
+#         return cls.bulk_create(iterable, *args, **kwargs)
+#     except exc.IntegrityError as e:
+#         db.session.rollback()
+#         return None
+
+#q.filter(cls.id.in_([2, 3, 5, 7, 11]))
+
+
+# path = os.getcwd()
+# # file Upload
+# UPLOAD_FOLDER = os.path.join(path, "uploads")
+
+# # Make directory if "uploads" folder not exists
+# if not os.path.isdir(UPLOAD_FOLDER):
+#     os.mkdir(UPLOAD_FOLDER)
+
+# app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+# from uuid import uuid4
+
+
+# def uniquify(string):
+#     ident = uuid4().__str__()[:8]
+#     return f"{ident}-{string}"
+
+
+# class UserSchema(Schema):
+#     name = fields.Str()
+#     # password is "write-only"
+#     password = fields.Str(load_only=True)
+#     # created_at is "read-only"
+#     created_at = fields.DateTime(dump_only=True)
+
+#  sa.Enum(name='variationvariable').drop(op.get_bind(), checkfirst=False)
+
+# permission = fields.Str(validate=validate.OneOf(["read", "write", "admin"]))
+
+    # def get_by_variation_variable(self, variable):
+    #     """
+    #     Check a variation_variable by their variable
+    #     :param variable:
+    #     :return: ProductVariationVariable or None
+    #     """
+    #     return db.session.query(self.model).filter_by(variable=variable).first()
+    
+    
+# from datetime import datetime
+# from marshmallow import Schema, fields, validates, ValidationError
+
+# class CreateNoteInputSchema(Schema):
+#     time_created = fields.DateTime(required=True)
+
+#     @validates('time_created')
+#     def is_not_in_future(value):
+#         """'value' is the datetime parsed from time_created by marshmallow"""
+#         now = datetime.now()
+#         if value > now:
+#             raise ValidationError("Can't create notes in the future!")
+        # if the function doesn't raise an error, the check is considered passed
+        
+        
+# from flask import Flask
+# from celery import Celery
+
+# broker_url = 'amqp://guest@localhost'          # Broker URL for RabbitMQ task queue
+
+# app = Flask(__name__)    
+# celery = Celery(app.name, broker=broker_url)
+# celery.config_from_object('celeryconfig')      # Your celery configurations in a celeryconfig.py
+
+# @celery.task(bind=True)
+# def some_long_task(self, x, y):
+#     # Do some long task
+#     ...
+
+# @app.route('/render/<id>', methods=['POST'])
+# def render_script(id=None):
+#     ...
+#     data = json.loads(request.data)
+#     text_list = data.get('text_list')
+#     final_file = audio_class.render_audio(data=text_list)
+#     some_long_task.delay(x, y)                 # Call your async task and pass whatever necessary variables
+#     return Response(
+#         mimetype='application/json',
+#         status=200
+#     )
+
+
+# class QueryWithSoftDelete(BaseQuery):
+#     def __new__(cls, *args, **kwargs):
+#         obj = super(QueryWithSoftDelete, cls).__new__(cls)
+#         with_deleted = kwargs.pop('_with_deleted', False)
+#         if len(args) > 0:
+#             super(QueryWithSoftDelete, obj).__init__(*args, **kwargs)
+#             return obj.filter_by(deleted=False) if not with_deleted else obj
+#         return obj
+
+#     def __init__(self, *args, **kwargs):
+#         pass
+
+#     def with_deleted(self):
+#         return self.__class__(db.class_mapper(self._mapper_zero().class_),
+#                               session=db.session(), _with_deleted=True)
+
+# version: '3.7'
+
+# services:
+#   web:
+#     build: .
+#     command: python manage.py run
+#     volumes:
+#       - .:/usr/src/app/
+#     ports:
+#       - 5000:5000
+#     env_file:
+#       - ./docker.env
+
+#     depends_on:
+#       - db
+
+#   db:
+#     image: postgres:12-alpine
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data/
+#     env_file:
+#       - ./docker.env
+
+# volumes:
+#   postgres_data:
+
+# POSTGRES_USER=mutuba
+# POSTGRES_PASSWORD=baraka11
+# POSTGRES_DB=bumi_docker
+
+# SECRET="some-very-long-string-of-random-characters-CHANGE-TO-YOUR-LIKING"
+# APP_SETTINGS=development
+
+# DATABASE_URL=postgresql+psycopg2://mutuba:baraka11@localhost:5432/bumi_docker
+
+
+# APP_MAIL_USERNAME="a99fdd287b5ab4"
+
+# APP_MAIL_PASSWORD="bb30d740b00338"
+
+# def upgrade():
+#      op.alter_column('vendor', 'active', nullable=False, server_default=sa.schema.DefaultClause("0"))
+
+
+# def downgrade():
+#     op.alter_column('vendor', 'active', nullable=False, server_default=sa.schema.DefaultClause("1"))
+
+    # price = db.Column(db.Numeric(precision=9, scale=2), nullable=False, default=0.00)
+    # discount = db.Column(db.Numeric(precision=5, scale=2)c, nullable=False, default=0.00)
+    
+                # "price": fields.Float(
+            #     required=False,
+            #     description="The selling price of the product",
+            #     example=9200.00,
+            # ),
+            # "discount": fields.Float(
+            #     required=False,
+            #     description="The allowed discount for the customers",
+            #     example=0.50,
+            # ),
+            
+# discount = fields.Decimal(as_string=True)
+
+
+# def upgrade():
+#     # ### commands auto generated by Alembic - please adjust! ###
+#     op.drop_column('product', 'discount')
+#     # ### end Alembic commands ###
+
+
+# def downgrade():
+#     # ### commands auto generated by Alembic - please adjust! ###
+#     op.add_column('product', sa.Column('discount', sa.NUMERIC(precision=5, scale=2), autoincrement=False, nullable=False, 
+#                                       server_default='0.00'))
+
+
+    # @property
+    # def price(self):
+
+    #     product_variations = self.variations
+    #     variation_with_values_and_active = [
+    #         variation_variable
+    #         for variation_variable in product_variations
+    #         if variation_variable.variation_values and variation_variable.active
+    #     ]
+
+    #     variation_values_min_prices = [
+    #         variation_value.min_price
+    #         for variation_value in variation_with_values_and_active
+    #     ]
+    #     return sum(variation_values_min_prices)
+
+    # @property
+    # def sale_price(self):
+
+    #     product_variations = self.variations
+    #     variation_with_values_and_active = [
+    #         variation_variable
+    #         for variation_variable in product_variations
+    #         if variation_variable.variation_values and variation_variable.active
+    #     ]
+    #     variation_values_min_sale_prices = [
+    #         variation_value.min_sale_price
+    #         for variation_value in variation_with_values_and_active
+    #     ]
+    #     return sum(variation_values_min_sale_prices)
+    
+    # @property
+    # def min_price(self):
+    #     variation_values = self.variation_values
+    #     prices = [
+    #         variation_value.variation_value_price
+    #         for variation_value in variation_values
+    #         if variation_value.active
+    #     ]
+    #     return min(prices)
+
+    # @property
+    # def min_sale_price(self):
+    #     variation_values = self.variation_values
+    #     sale_prices = [
+    #         variation_value.variation_value_sale_price
+    #         for variation_value in variation_values
+    #         if variation_value.active
+    #     ]
+    #     return min(sale_prices)
+    # @api.response(code=404, model=_error, description='Not Found')
+    
+    
+# @app.errorhandler(404)
+# def resource_not_found(e):
+#     return jsonify(error=str(e)), 404
+
+
+# from flask import jsonify
+# from instance import app
+
+
+# class ApiException(Exception):
+#     status_code = 400
+
+#     def __init__(self, message, status_code=None, payload=None):
+#         super().__init__()
+#         self.message = message
+#         if status_code is not None:
+#             self.status_code = status_code
+#         self.payload = payload
+
+
+#     def to_dict(self):
+#         rv = dict(self.payload or ())
+#         rv["message"] = self.message
+#         return rv
+
+
+
+
+# @app.errorhandler(ApiException)
+# def resource_not_found(e):
+#     return jsonify(e.to_dict())
+
+# queryset = queryset.filter(or_(Product.price==price, Product.sale_price == price)
+
+
+
+
+
