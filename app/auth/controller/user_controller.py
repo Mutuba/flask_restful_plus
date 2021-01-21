@@ -668,6 +668,8 @@ class User(Resource):
 #     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 #     balance = Column(Numeric(15, 5))
 
+
+
 # class User(Base):
 #     __tablename__ = 'user'
 #     id = Column(Integer, primary_key=True)
@@ -715,16 +717,22 @@ class User(Resource):
     #     db.Enum(PaymentMethod), default=PaymentMethod.PAYMENT_ON_DELIVERY, nullable=True
     # )
     
+
 # db.session.query(func.avg(ProductRating.rating).label("average_rating")).filter(ProductRating.product_id == self.id)
     
+
 # class PaymentMethod(enum.Enum):
 #         MPESA = "Mpesa"
 #     CARD = "Card"
 #     WALLET = "Wallet"
 #     PAYMENT_ON_DELIVERY = "Payment on Delivery"
 
+
+
 # def upgrade():
 #     op.drop_constraint('experiments_name_key', 'experiments')
+
+
 
 # def downgrade():
 #     op.create_unique_constraint('experiments_name_key', 'experiments', ['name'])
@@ -746,6 +754,8 @@ class User(Resource):
     #         return False
     
 
+
+
 # @staticmethod
 # def get_by_id(product_rating_id):
 #     """
@@ -754,7 +764,9 @@ class User(Resource):
 #     :return: ProductRating object or None
 #     """
 #     return ProductRating.query.filter_by(id=product_rating_id).first()
-    
+
+
+
 
 # @classmethod
 # def bulk_create_or_none(cls, iterable, *args, **kwargs):
