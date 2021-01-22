@@ -631,11 +631,15 @@ class User(Resource):
 
 # Base = declarative_base()
 
+
+
 # class SavingsAccount(Base):
 #     __tablename__ = 'account'
 #     id = Column(Integer, primary_key=True)
 #     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 #     balance = Column(Numeric(15, 5))
+
+
 
 # class User(Base):
 #     __tablename__ = 'user'
@@ -643,6 +647,7 @@ class User(Resource):
 #     name = Column(String(100), nullable=False)
 
 #     accounts = relationship("SavingsAccount", backref="owner")
+
 
 #     @hybrid_property
 #     def balance(self):
