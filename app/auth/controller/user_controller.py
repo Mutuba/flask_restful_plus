@@ -1009,6 +1009,9 @@ class User(Resource):
     # @api.response(code=404, model=_error, description='Not Found')
     
     
+
+
+
 # @app.errorhandler(404)
 # def resource_not_found(e):
 #     return jsonify(error=str(e)), 404
@@ -1042,8 +1045,6 @@ class User(Resource):
 #     return jsonify(e.to_dict())
 
 # queryset = queryset.filter(or_(Product.price==price, Product.sale_price == price)
-
-
 
 
 
