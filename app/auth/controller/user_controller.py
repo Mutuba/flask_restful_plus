@@ -1047,4 +1047,3 @@ class User(Resource):
 # queryset = queryset.filter(or_(Product.price==price, Product.sale_price == price)
 
 
-

@@ -5,6 +5,7 @@ from app.auth.service.auth_helper import Auth
 from ..util.auth_dto import AuthDto
 
 api = AuthDto.api
+
 user_auth = AuthDto.user_auth
 
 

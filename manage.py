@@ -32,6 +32,7 @@ from app.auth.model.mutuba import Mutuba
 from app.auth import blueprint
 
 from app.me.route.home import home_api
+
 from app.me_2.route.home import home_api2
 
 
@@ -41,6 +42,7 @@ app.register_blueprint(blueprint)
 
 
 app.register_blueprint(home_api, url_prefix='/api1')
+
 app.register_blueprint(home_api, url_prefix='/api2')
 
 
@@ -58,6 +60,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def run():
     app.run()
+
 
 @manager.command
 def test():
