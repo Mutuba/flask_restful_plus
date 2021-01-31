@@ -9,6 +9,8 @@ api = AuthDto.api
 user_auth = AuthDto.user_auth
 
 
+
+
 @api.route('/login')
 class UserLogin(Resource):
     """
@@ -20,6 +22,8 @@ class UserLogin(Resource):
         # get the post data
         post_data = request.json
         return Auth.login_user(data=post_data)
+
+
 
 
 @api.route('/logout')
