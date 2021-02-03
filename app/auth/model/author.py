@@ -4,6 +4,8 @@ from sqlalchemy_json import MutableJson
 
 
 class Author(db.Model):
+    
+    
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
     name = db.Column(db.String)
