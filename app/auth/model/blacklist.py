@@ -1,7 +1,6 @@
 from instance import db
 import datetime
 
-
 class BlacklistToken(db.Model):
     """
     Token Model for storing JWT tokens
@@ -10,9 +9,7 @@ class BlacklistToken(db.Model):
     __tablename__ = 'blacklist_tokens'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    
     token = db.Column(db.String(500), unique=True, nullable=False)
-    
     blacklisted_on = db.Column(db.DateTime, nullable=False)
 
 
