@@ -956,6 +956,8 @@ class User(Resource):
 #                                       server_default='0.00'))
 
 
+
+
     # @property
     # def price(self):
 
@@ -972,6 +974,7 @@ class User(Resource):
     #     ]
     #     return sum(variation_values_min_prices)
 
+
     # @property
     # def sale_price(self):
 
@@ -987,6 +990,8 @@ class User(Resource):
     #     ]
     #     return sum(variation_values_min_sale_prices)
     
+    
+    
     # @property
     # def min_price(self):
     #     variation_values = self.variation_values
@@ -996,6 +1001,7 @@ class User(Resource):
     #         if variation_value.active
     #     ]
     #     return min(prices)
+
 
     # @property
     # def min_sale_price(self):
